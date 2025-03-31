@@ -38,7 +38,6 @@ public class VehicleStreamer : ModuleRules
 				"Engine",
 				"Slate",
 				"SlateCore",
-
                 "InputCore", 
 				"Sockets",
 				"Networking"
@@ -55,5 +54,7 @@ public class VehicleStreamer : ModuleRules
 			);
 
         PublicDefinitions.Add("VEHICLESTREAMER_API=");
+
+
     }
 }
