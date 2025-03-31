@@ -23,7 +23,16 @@ Real-time UDP data streaming for physical vehicle simulation. Sends actor's loca
 
 ---
 
-## Using the UDP Client
+## Using in Other Projects
+
+1. Copy `Plugins/VehicleStreamer` into the `Plugins` folder of your new project.
+2. Regenerate project files.
+3. Compile and use `BP_TestVehicle` or create your own vehicle class based on `ATestVehicle`.
+4. Please don't forget the chamge cube mesh in CPP files for TestVehicle. 
+
+---
+
+## Using the UDP Client on Terminal
 
 This plugin streams the vehicle’s transform (location and rotation) via UDP to the IP and port specified in the settings (`127.0.0.1:8888` by default).
 
@@ -38,6 +47,22 @@ This script listens on the specified port and prints all incoming messages sent 
 ```bash
 python udp_listener.py
 ```
+#### On **MacOS**:
+
+```bash
+python3 udp_listener.py
+```
+
+Make sure Python is installed. You can verify it by running:
+
+```bash
+python --version (Windows)
+```
+
+```bash
+python3 --version (macOS/Linux)
+```
+
 ---
 
 ## Configurable Settings (Optional)
@@ -57,29 +82,6 @@ Or edit directly in `DefaultGame.ini`:
 UDPServerIP=127.0.0.1
 UDPServerPort=8888
 ```
-#### On **MacOS**:
-
-```bash
-python3 udp_listener.py
-```
-
-Make sure Python is installed. You can verify it by running:
-
-```bash
-python --version (Windows)
-```
-
-```bash
-python3 --version (macOS/Linux)
-```
----
-
-## Using in Other Projects
-
-1. Copy `Plugins/VehicleStreamer` into the `Plugins` folder of your new project.
-2. Regenerate project files.
-3. Compile and use `BP_TestVehicle` or create your own vehicle class based on `ATestVehicle`.
-4. Please don't forget the chamge cube mesh in CPP files for TestVehicle. 
 
 ---
 
