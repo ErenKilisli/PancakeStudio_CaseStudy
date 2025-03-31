@@ -43,6 +43,12 @@ void ATestVehicle::BeginPlay()
 	{
 		UE_LOG(LogTemp, Warning, TEXT("UDPManager NOT found."));
 	}
+
+	//set first direction
+	ChangeDirection();
+
+	//Change direction in few seconds
+	GetWorld()->GetTimerManager().SetTimer(DirectionChangeTimer, this, &ATestVehicle::ChangeDirection, DirectionChangeInterval, true);
 }
 
 // Called every frame
@@ -57,4 +63,22 @@ void ATestVehicle::Tick(float DeltaTime)
 	{
 		UDPManagerRef->SendVehicleData(Location, Rotation);
 	}
+
+	if (MeshComponent && CurrentDirection.Size() > 0)
+	{
+		MeshComponent->AddForce(CurrentDirection * MovementForce);
+	}
+
+	if (UDPManagerRef)
+	{
+		UDPManagerRef->SendVehicleData(GetActorLocation(), GetActorRotation());
+	}
+}
+
+void ATestVehicle::ChangeDirection()
+{
+	float X = FMath::FRandRange(-1.0f, 1.0f);
+	float Y = FMath::FRandRange(-1.0f, 1.0f);
+
+	CurrentDirection = FVector(X, Y, 0.0f).GetSafeNormal();
 }

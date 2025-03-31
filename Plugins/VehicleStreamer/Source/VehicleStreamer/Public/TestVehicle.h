@@ -31,4 +31,19 @@ private:
 
 	AUDPManager* UDPManagerRef;
 
+	//random movement
+	UPROPERTY(EditAnywhere, Category = "Movement")
+	float MovementForce = 100000.0f;
+
+	UPROPERTY(EditAnywhere, Category = "Movement")
+	float DirectionChangeInterval = 2.0f;
+
+	FTimerHandle DirectionChangeTimer;
+
+	FVector CurrentDirection;
+
+	void ChangeDirection();
+
+
+
 };
