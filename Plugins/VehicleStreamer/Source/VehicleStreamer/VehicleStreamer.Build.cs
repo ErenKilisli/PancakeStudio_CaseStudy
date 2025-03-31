@@ -38,6 +38,10 @@ public class VehicleStreamer : ModuleRules
 				"Engine",
 				"Slate",
 				"SlateCore",
+
+                "InputCore", 
+				"Sockets",
+				"Networking"
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);

@@ -6,7 +6,7 @@
 #include "GameFramework/Actor.h"
 #include "TestVehicle.generated.h"
 
-UCLASS()
+UCLASS(BlueprintType, Blueprintable)
 class VEHICLESTREAMER_API ATestVehicle : public AActor
 {
 	GENERATED_BODY()
@@ -22,5 +22,9 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+private:
+	UPROPERTY(VisibleAnywhere)
+	UStaticMeshComponent* MeshComponent;
 
 };
