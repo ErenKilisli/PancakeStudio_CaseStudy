@@ -3,6 +3,7 @@
 
 #include "UDPManager.h"
 #include "Common/UdpSocketBuilder.h"
+#include "VehicleStreamerSettings.h"
 
 
 // Sets default values
@@ -17,12 +18,16 @@ AUDPManager::AUDPManager()
 void AUDPManager::BeginPlay()
 {
 	Super::BeginPlay();
-	
-	// Initialize the UDP socket here or when you need to send/receive data
-	if (!InitializeUDPSocket(TEXT("TestUDPSocket"), TEXT("127.0.0.1"), 8888))
-	{
-		UE_LOG(LogTemp, Error, TEXT("Failed to initialize UDP socket"));
-	}
+
+    const auto* Settings = GetDefault<UVehicleStreamerSettings>();
+    FString IP = Settings->UDPServerIP;
+    int32 Port = Settings->UDPServerPort;
+
+    // Initialize the UDP socket here or when you need to send/receive data
+    if (!InitializeUDPSocket(TEXT("UDP_Socket"), IP, Port))
+    {
+        UE_LOG(LogTemp, Error, TEXT("UDPManager: Ayarlardan IP/Port alınamadı"));
+    }
 }
 
 // Called every frame
