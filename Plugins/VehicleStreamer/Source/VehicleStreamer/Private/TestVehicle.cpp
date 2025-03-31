@@ -5,6 +5,7 @@
 #include "Components/StaticMeshComponent.h"
 #include "UObject/ConstructorHelpers.h"
 
+
 // Sets default values
 ATestVehicle::ATestVehicle()
 {
@@ -26,8 +27,7 @@ ATestVehicle::ATestVehicle()
 // Called when the game starts or when spawned
 void ATestVehicle::BeginPlay()
 {
-	Super::BeginPlay();
-	
+
 }
 
 // Called every frame
@@ -40,4 +40,3 @@ void ATestVehicle::Tick(float DeltaTime)
 
     UE_LOG(LogTemp, Warning, TEXT("Location: %s | Rotation: %s"), *Location.ToString(), *Rotation.ToString());
 }
-
