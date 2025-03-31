@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "UDPManager.h"
 #include "TestVehicle.generated.h"
 
 
@@ -27,5 +28,7 @@ public:
 private:
 	UPROPERTY(VisibleAnywhere)
 	UStaticMeshComponent* MeshComponent;
+
+	AUDPManager* UDPManagerRef;
 
 };

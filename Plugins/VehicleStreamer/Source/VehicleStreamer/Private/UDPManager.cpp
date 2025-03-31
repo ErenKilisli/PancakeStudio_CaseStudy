@@ -34,7 +34,7 @@ void AUDPManager::Tick(float DeltaTime)
 
 bool AUDPManager::InitializeUDPSocket(const FString& SocketName, const FString& IP, const int32 Port)
 {
-    // Remote adresi ayarla
+    // Remote adress adjust
     RemoteAddr = ISocketSubsystem::Get(PLATFORM_SOCKETSUBSYSTEM)->CreateInternetAddr();
     bool bIsValid;
     RemoteAddr->SetIp(*IP, bIsValid);
@@ -42,7 +42,7 @@ bool AUDPManager::InitializeUDPSocket(const FString& SocketName, const FString& 
 
     if (!bIsValid)
     {
-        UE_LOG(LogTemp, Error, TEXT("AUDPManager: IP geçersiz!"));
+        UE_LOG(LogTemp, Error, TEXT("AUDPManager: IP INVALID!"));
         return false;
     }
 
@@ -53,7 +53,7 @@ bool AUDPManager::InitializeUDPSocket(const FString& SocketName, const FString& 
 
     if (!UDPSocket)
     {
-        UE_LOG(LogTemp, Error, TEXT("AUDPManager: Socket oluşturulamadı"));
+        UE_LOG(LogTemp, Error, TEXT("AUDPManager: Socket can't made"));
         return false;
     }
 
@@ -81,11 +81,11 @@ void AUDPManager::SendVehicleData(const FVector& Location, const FRotator& Rotat
 
         if (Success)
         {
-            UE_LOG(LogTemp, Log, TEXT("UDPManager: Veri gönderildi → %s"), *DataToSend);
+            UE_LOG(LogTemp, Log, TEXT("UDPManager: Data send → %s"), *DataToSend);
         }
         else
         {
-            UE_LOG(LogTemp, Error, TEXT("UDPManager: Gönderim başarısız"));
+            UE_LOG(LogTemp, Error, TEXT("UDPManager: Send Failed"));
         }
     }
 }

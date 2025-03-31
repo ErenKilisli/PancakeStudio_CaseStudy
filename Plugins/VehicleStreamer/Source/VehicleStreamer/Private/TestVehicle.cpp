@@ -4,6 +4,8 @@
 #include "TestVehicle.h"
 #include "Components/StaticMeshComponent.h"
 #include "UObject/ConstructorHelpers.h"
+#include "Kismet/GameplayStatics.h"
+#include "UDPManager.h"
 
 
 // Sets default values
@@ -27,7 +29,20 @@ ATestVehicle::ATestVehicle()
 // Called when the game starts or when spawned
 void ATestVehicle::BeginPlay()
 {
+	Super::BeginPlay();
 
+	TArray<AActor*> FoundActors;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AUDPManager::StaticClass(), FoundActors);
+
+	if (FoundActors.Num() > 0)
+	{
+		UDPManagerRef = Cast<AUDPManager>(FoundActors[0]);
+		UE_LOG(LogTemp, Log, TEXT("UDPManager found."));
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("UDPManager NOT found."));
+	}
 }
 
 // Called every frame
@@ -38,5 +53,8 @@ void ATestVehicle::Tick(float DeltaTime)
     FVector Location = GetActorLocation();
     FRotator Rotation = GetActorRotation();
 
-    UE_LOG(LogTemp, Warning, TEXT("Location: %s | Rotation: %s"), *Location.ToString(), *Rotation.ToString());
+	if (UDPManagerRef)
+	{
+		UDPManagerRef->SendVehicleData(Location, Rotation);
+	}
 }
