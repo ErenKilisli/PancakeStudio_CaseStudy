@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "UDPManager.h"
+#include "Async/Async.h"
 #include "TestVehicle.generated.h"
 
 

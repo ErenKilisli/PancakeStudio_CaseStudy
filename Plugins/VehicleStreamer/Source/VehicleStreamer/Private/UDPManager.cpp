@@ -93,5 +93,4 @@ void AUDPManager::SendVehicleData(const FVector& Location, const FRotator& Rotat
 
 void AUDPManager::ReceiveData()
 {
-    // Receiving data implementation would go here if needed
 }

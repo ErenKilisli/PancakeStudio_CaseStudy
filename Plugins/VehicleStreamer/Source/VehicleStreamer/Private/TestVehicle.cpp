@@ -6,6 +6,7 @@
 #include "UObject/ConstructorHelpers.h"
 #include "Kismet/GameplayStatics.h"
 #include "UDPManager.h"
+#include "Async/Async.h"
 
 
 // Sets default values
@@ -56,22 +57,24 @@ void ATestVehicle::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-    FVector Location = GetActorLocation();
-    FRotator Rotation = GetActorRotation();
+	FVector Location = GetActorLocation();
+	FRotator Rotation = GetActorRotation();
 
+	//AsyncTask optimizasyon
 	if (UDPManagerRef)
 	{
-		UDPManagerRef->SendVehicleData(Location, Rotation);
+		AsyncTask(ENamedThreads::AnyBackgroundThreadNormalTask, [this, Location, Rotation]()
+			{
+				if (UDPManagerRef)
+				{
+					UDPManagerRef->SendVehicleData(Location, Rotation);
+				}
+			});
 	}
 
-	if (MeshComponent && CurrentDirection.Size() > 0)
+	if (MeshComponent && !CurrentDirection.IsNearlyZero())
 	{
 		MeshComponent->AddForce(CurrentDirection * MovementForce);
-	}
-
-	if (UDPManagerRef)
-	{
-		UDPManagerRef->SendVehicleData(GetActorLocation(), GetActorRotation());
 	}
 }
 

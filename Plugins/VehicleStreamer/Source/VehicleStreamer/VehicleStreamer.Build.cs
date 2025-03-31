@@ -53,8 +53,5 @@ public class VehicleStreamer : ModuleRules
 			}
 			);
 
-        PublicDefinitions.Add("VEHICLESTREAMER_API=");
-
-
     }
 }
